@@ -1,9 +1,6 @@
 package com.example;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -11,30 +8,51 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    private String firstName;
+    private String lastName;
+    //@OneToOne(cascade=CascadeType.ALL)
+    @Embedded
+    private Address address;
+
+    protected User() {}
+
+    public User(String firstName, String lastName, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+    }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    private String firstName;
-    private String lastName;
-
-    protected User() {}
-
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
+    public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "User[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address=" + address +
+                '}';
     }
-
 }

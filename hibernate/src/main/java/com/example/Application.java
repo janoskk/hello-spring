@@ -30,7 +30,7 @@ public class Application {
         @Override
         public void run(String... args) throws Exception {
             System.out.println("Hello, World!");
-            repository.save(new User("John", "Smith"));
+            repository.save(new User("John", "Smith", new Address("Itt utca 13", "Hungary", "1111")));
             try {
                 List<User> userList = repository.findByLastName("Smith");
                 System.out.println("User name: " + userList.get(0).getFirstName());
